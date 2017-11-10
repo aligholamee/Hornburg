@@ -15,6 +15,15 @@ dataset = numpy.array([[3,5],[5,3],[8,4],[3,1],[6,4],[5,4],[7,5],[8,3]])
 slope_list = [5, 3, 6, 6, 3, 4]
 constant_list = [6, 1, 4, 8, 4, 7]
 
+plot_titles = [
+    'y = 5x + 6',
+    'y = 3x + 1',
+    'y = 6x + 4',
+    'y = 6x + 8',
+    'y = 3x + 4',
+    'y = 4x + 7'
+]
+
 # ======================================== #
 # ========== Least Square Error ========== #
 # ======================================== #
@@ -54,11 +63,12 @@ print(computeErrorForLineGivenPoints(4, 7, dataset))
 
 
 # ============ Plot the result =========== #
-j = 0
+fig = plt.figure()
+
 for i in range(1, 7):
-    plt.subplot(3, 2, i)
-    plt.scatter(dataset[:,0],dataset[:,1])
-    plt.plot(dataset, dataset/slope_list[j] + constant_list[j])
-    j += 1
+    ax = fig.add_subplot(3, 2, i)
+    ax.title.set_text(plot_titles[i-1])
+    ax.scatter(dataset[:,0],dataset[:,1])  
+    plt.plot(dataset, dataset/slope_list[i-1] + constant_list[i-1])
 
 plt.show()
