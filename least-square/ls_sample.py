@@ -59,6 +59,12 @@ for i in range(1, 7):
     ax = fig.add_subplot(3, 2, i)
     ax.title.set_text(plot_titles[i-1])
     ax.scatter(dataset[:,0],dataset[:,1])  
+
+    errorLabel = "Error = "
+    ax.text(0.95, 0.01, errorLabel + str(errorlist[i-1]),
+            verticalalignment='bottom', horizontalalignment='right',
+            transform=ax.transAxes,
+            color='green', fontsize=12)
     plt.plot(dataset, dataset/slope_list[i-1] + constant_list[i-1])
 
 plt.show()
