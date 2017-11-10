@@ -42,28 +42,18 @@ def computeErrorForLineGivenPoints(b, m, coordinates):
 # ======================================== #
 # ============ Test with data ============ #
 # ======================================== #
+errorlist = []
 
-print("Hypothesis y = 5x + 6 error: ")
-print(computeErrorForLineGivenPoints(5, 6, dataset))
+for i in range(0, 6):
+    errorlist.append(computeErrorForLineGivenPoints(slope_list[i], constant_list[i], dataset))
+    print("Hypothesis " + plot_titles[i] + " error: ")
+    print(errorlist[i])
 
-print("Hypothesis y = 3x + 1 error: ")
-print(computeErrorForLineGivenPoints(3, 1, dataset))
-
-print("Hypothesis y = 6x + 4 error: ")
-print(computeErrorForLineGivenPoints(6, 4, dataset))
-
-print("Hypothesis y = 6x + 8 error: ")
-print(computeErrorForLineGivenPoints(6, 8, dataset))
-
-print("Hypothesis y = 3x + 4 error: ")
-print(computeErrorForLineGivenPoints(3, 4, dataset))
-
-print("Hypothesis y = 4x + 7 error: ")
-print(computeErrorForLineGivenPoints(4, 7, dataset))
-
-
+# ======================================== #
 # ============ Plot the result =========== #
+# ======================================== #
 fig = plt.figure()
+fig.suptitle('Least Square Errors', fontsize=10, fontweight='bold')
 
 for i in range(1, 7):
     ax = fig.add_subplot(3, 2, i)
