@@ -54,7 +54,7 @@ def gradientDescentInitializer(cooridnates, initial_slope, initial_constant, lea
     
     # Start training for numOfIterations times
     for i in range(0, numOfIterations):
-        trained_constant, trained_slope = trainWithGradientDescent(cooridnates, initial_slope, initial_constant, learning_rate)
+        trained_constant, trained_slope = trainWithGradientDescent(cooridnates, initial_slope, initial_constant, learning_rate, numOfIterations)
     
     return [trained_constant, trained_slope]
 
