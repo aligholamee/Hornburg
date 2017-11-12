@@ -12,6 +12,12 @@ import numpy as np
 
 dataset = np.array([[1,2.5],[2,3.5],[3,4.6],[4,4.8],[5,5.9],[6,7.1],[6.5,7,5]])
 
+# Define the initial values
+learning_rate = 0.02
+numOfIterations = 85
+initialConstant = 5
+initialSlope = 2
+
 # ======================================== #
 # ====== Train With Gradient Descent ===== #
 # ======================================== #
@@ -55,3 +61,10 @@ def gradientDescentInitializer(cooridnates, initial_slope, initial_constant, lea
 # ======================================== #
 # ======= Start & Plot the result ======== #
 # ======================================== #
+constant_result, slope_result = gradientDescentInitializer(dataset, initialSlope, initialConstant, learning_rate)
+
+fig = plt.figure()
+ax = fig.add_sublplot(111)
+ax.scatter(dataset[:,0],dataset[:,1])
+plt.plot(dataset, dataset * slope_result + constant_result)
+plt.show()
