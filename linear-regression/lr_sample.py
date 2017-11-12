@@ -14,9 +14,12 @@ dataset = np.array([[1,2.5],[2,3.5],[3,4.6],[4,4.8],[5,5.9],[6,7.1],[6.5,7.5]])
 
 # Define the initial values
 learning_rate = 0.02
-numOfIterations = 2000
+numOfIterations = 0
 initialConstant = 5
 initialSlope = 2
+
+# Testing declarations
+iterations_array = [10, 30, 60, 150, 500, 1000]
 
 # ======================================== #
 # ====== Train With Gradient Descent ===== #
@@ -68,18 +71,22 @@ def gradientDescentInitializer(cooridnates, initial_slope, initial_constant, lea
 # ======================================== #
 # ======= Start & Plot the result ======== #
 # ======================================== #
-constant_result, slope_result = gradientDescentInitializer(dataset, initialSlope, initialConstant, learning_rate, numOfIterations)
-
 fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.scatter(dataset[:,0],dataset[:,1])
-plt.plot(dataset[:,0], dataset[:,0] * slope_result + constant_result)
-ax.text(0.95, 0.01, "Iterations: " + str(numOfIterations),
-        verticalalignment='bottom', horizontalalignment='right',
-        transform=ax.transAxes,
-        color='green', fontsize=10)
-ax.text(0.95, 0.05, "Learning Rate: " + str(learning_rate),
-        verticalalignment='bottom', horizontalalignment='right',
-        transform=ax.transAxes,
-        color='green', fontsize=10)
+fig.suptitle('Linear Regression', fontsize=10, fontweight='bold')
+
+for i in range(1, len(iterations_array)+1):
+    constant_result, slope_result = gradientDescentInitializer(dataset, initialSlope, initialConstant, learning_rate, iterations_array[i-1])
+    ax = fig.add_subplot(3, 2, i)
+    ax.scatter(dataset[:,0],dataset[:,1])
+    ax.plot(dataset[:,0], dataset[:,0] * slope_result + constant_result)
+    ax.text(0.95, 0.01, "Iterations: " + str(iterations_array[i-1]),
+            verticalalignment='bottom', horizontalalignment='right',
+            transform=ax.transAxes,
+            color='green', fontsize=10)
+    ax.text(0.95, 0.09, "Learning Rate: " + str(learning_rate),
+            verticalalignment='bottom', horizontalalignment='right',
+            transform=ax.transAxes,
+            color='green', fontsize=10)
+
+
 plt.show()
