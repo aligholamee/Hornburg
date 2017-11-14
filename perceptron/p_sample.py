@@ -7,8 +7,10 @@
 # [] Created By : Ali Gholami (aligholami7596@gmail.com)
 # ========================================
 #
+import math
 from numpy import array, random, dot
 from random import choice
+
 
 dataset = [         (array([3, 4, 5]), 1),
                     (array([3, 4, 6]), 0),
@@ -26,9 +28,8 @@ dataset = [         (array([3, 4, 5]), 1),
 # Define the initial values
 learning_rate = 0.2
 weights = random.rand(3)
-numOfIterations = 50
+numOfIterations = 150
 
-# Neuron decision function
 activationFunction = lambda x: 0 if x < 0 else 1
 
 # ======================================== #
