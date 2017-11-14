@@ -27,12 +27,11 @@ dataset = array([
 ])
 
 # Define the initial values
-learning_rate = 0.02
 numOfIterations = 5000
 
 # Initial weights
 firstLayerWeights = random.rand(3, 2)
-secondLayerWeighs = random.rand(2, 1)
+secondLayerWeights = random.rand(2, 1)
 
 # The beloved sigmoid function 
 def sigmoid(x):
@@ -45,13 +44,13 @@ def sigmoidCurve(x):
 # ======================================== #
 # ======== Train The 2 Layer ANN ========= #
 # ======================================== #
-def trainNeuralNetwork(dataset, flw, slw, numOfIterations, learning_rate):
+def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
     
     updatedFLW = 0
     updatedSLW = 0
 
     for i in range(numOfIterations):
-        firstLayerOutputVector = sigmoid(dot(flw, dataset[:,0]))
+        firstLayerOutputVector = sigmoid(dot(flw, dataset[:, 0]))
         secondLayerOutputVector = sigmoid(dot(slw, firstLayerOutputVector))
 
         # Find the error
@@ -77,4 +76,16 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations, learning_rate):
     
     return [flw, slw]
 
-    
+
+# ======================================== #
+# ======= Start and Plot The Result ====== #
+# ======================================== #
+
+for x in dataset:
+    print(x[0])
+
+txt = {firstLayerWeights}
+print("firstLayerWeights " + txt);
+
+# print(dot(firstLayerWeights, dataset[:,0]))
+# trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
