@@ -12,7 +12,8 @@ from numpy import array, random, dot
 
 
 # The dataset from the perceptron (which it was failing at classification procedure)
-dataset = array([         (array([3, 4, 5]), 1),
+dataset = array([   
+                    (array([3, 4, 5]), 1),
                     (array([3, 4, 6]), 0),
                     (array([3, 3, 5]), 0),
                     (array([3, 8, 5]), 0),
@@ -46,12 +47,34 @@ def sigmoidCurve(x):
 # ======================================== #
 def trainNeuralNetwork(dataset, flw, slw, numOfIterations, learning_rate):
     
+    updatedFLW = 0
+    updatedSLW = 0
+
     for i in range(numOfIterations):
         firstLayerOutputVector = sigmoid(dot(flw, dataset[:,0]))
         secondLayerOutputVector = sigmoid(dot(slw, firstLayerOutputVector))
 
         # Find the error
-        outputError = secondLayerOutputVector - dataset[:, 1]
+        secondLayerError = secondLayerOutputVector - dataset[:, 1]
 
-        # Calculate the adjustment value for the weights
-        weightAdjustmentValue = 
+        # Calculate the adjustment value for the layer 2 weights
+        secondLayerWeightAdjustmentValue = secondLayerError * secondLayerOutputVector * sigmoidCurve(secondLayerOutputVector)
+
+        # Update the layer 2 weights
+        slw += secondLayerWeightAdjustmentValue
+
+        # First layer error
+        firstLayerError = secondLayerWeightAdjustmentValue.dot(slw.T)
+
+        # First layer weight adjustment
+        firstLayerWeightAdjustmentValue = firstLayerError * firstLayerOutputVector * sigmoidCurve(firstLayerOutputVector)
+
+        # Update the layer 1 weights
+        flw += firstLayerWeightAdjustmentValue
+
+        updatedFLW = flw
+        updatedSLW = slw
+    
+    return [flw, slw]
+
+    
