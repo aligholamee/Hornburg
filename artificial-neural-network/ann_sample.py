@@ -26,9 +26,7 @@ dataset = array([
                     [9, 5, 5]
 ])
 
-dataset_labels = array([
-    1, 0, 0 , 0 , 1, 1, 1, 0, 0, 1, 0
-])
+dataset_labels = array([[1], [0], [0], [0], [1], [1], [1], [0], [0], [1], [0]])
 
 # Define the initial values
 numOfIterations = 5000
@@ -37,7 +35,7 @@ numOfIterations = 5000
 firstLayerWeights = random.rand(3, 2)
 secondLayerWeights = random.rand(2, 1)
 
-# The beloved sigmoid function 
+# The beloved sigmoid function
 def sigmoid(x):
     spart = (1 / (1 + exp(-x)))
     return spart
@@ -87,6 +85,9 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
 # ======= Start and Plot The Result ====== #
 # ======================================== #
 
-print(sigmoid(dot(dataset, firstLayerWeights)))
+x1 = sigmoid(dot(dataset,firstLayerWeights))
+print(sigmoid(dot(x1, secondLayerWeights)) - dataset_labels)
+
+
 
 # trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
