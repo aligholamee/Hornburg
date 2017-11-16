@@ -8,7 +8,7 @@
 # ========================================
 #
 import math
-from numpy import array, random, dot
+from numpy import array, random, dot, exp
 
 
 # The dataset from the perceptron (which it was failing at classification procedure)
@@ -39,7 +39,8 @@ secondLayerWeights = random.rand(2, 1)
 
 # The beloved sigmoid function 
 def sigmoid(x):
-    return (1 / (1 + math.exp(-x)))
+    spart = (1 / (1 + exp(-x)))
+    return spart
 
 # The sigmoid curve
 def sigmoidCurve(x):
@@ -56,10 +57,10 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
 
     for i in range(numOfIterations):
         firstLayerOutputVector = sigmoid(dot(flw, dataset))
-        secondLayerOutputVector = sigmoid(dot(slw, firstLayerOutputVector))
+        secondLayerOutputVector = sigmoid(dot(firstLayerOutputVector, slw))
 
         # Find the error
-        secondLayerError = secondLayerOutputVector - dataset[:, 1]
+        secondLayerError = secondLayerOutputVector - dataset_labels
 
         # Calculate the adjustment value for the layer 2 weights
         secondLayerWeightAdjustmentValue = secondLayerError * secondLayerOutputVector * sigmoidCurve(secondLayerOutputVector)
