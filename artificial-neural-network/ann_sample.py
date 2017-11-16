@@ -13,17 +13,21 @@ from numpy import array, random, dot
 
 # The dataset from the perceptron (which it was failing at classification procedure)
 dataset = array([   
-                    (array([3, 4, 5]), 1),
-                    (array([3, 4, 6]), 0),
-                    (array([3, 3, 5]), 0),
-                    (array([3, 8, 5]), 0),
-                    (array([4, 4, 5]), 1),
-                    (array([1, 0, 5]), 1),
-                    (array([7, 4, 8]), 1),
-                    (array([1, 6, 4]), 0),
-                    (array([3, 4, 5]), 0),
-                    (array([4, 4, 6]), 1),
-                    (array([9, 5, 5]), 0)
+                    [3, 4, 5],
+                    [3, 4, 6],
+                    [3, 3, 5],
+                    [3, 8, 5],
+                    [4, 4, 5],
+                    [1, 0, 5],
+                    [7, 4, 8],
+                    [1, 6, 4],
+                    [3, 4, 5],
+                    [4, 4, 6],
+                    [9, 5, 5]
+])
+
+dataset_labels = array([
+    1, 0, 0 , 0 , 1, 1, 1, 0, 0, 1, 0
 ])
 
 # Define the initial values
@@ -46,11 +50,12 @@ def sigmoidCurve(x):
 # ======================================== #
 def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
     
+    
     updatedFLW = 0
     updatedSLW = 0
 
     for i in range(numOfIterations):
-        firstLayerOutputVector = sigmoid(dot(flw, dataset[:, 0]))
+        firstLayerOutputVector = sigmoid(dot(flw, dataset))
         secondLayerOutputVector = sigmoid(dot(slw, firstLayerOutputVector))
 
         # Find the error
@@ -81,11 +86,6 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
 # ======= Start and Plot The Result ====== #
 # ======================================== #
 
-for x in dataset:
-    print(x[0])
+print(sigmoid(dot(dataset, firstLayerWeights)))
 
-txt = {firstLayerWeights}
-print("firstLayerWeights " + txt);
-
-# print(dot(firstLayerWeights, dataset[:,0]))
 # trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
