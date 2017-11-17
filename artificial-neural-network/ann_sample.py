@@ -79,8 +79,9 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
 # ======= Start and Plot The Result ====== #
 # ======================================== #
 l1_weight, l2_weight = trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
-print("Layer 1 weight updated to:")
+
+print("Layer 1 weights vector was updated to:")
 print(l1_weight)
 
-print("\nLayer 2 weight updated to:")
+print("\nLayer 2 weights vector was updated to:")
 print(l2_weight)
