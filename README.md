@@ -1,6 +1,6 @@
 # Hornburg
 <p align="center">
-    <img src="https://raw.githubusercontent.com/aligholamee/Hornburg/master/logo-hornburg.png">
+    <img src="https://raw.githubusercontent.com/aligholamee/Hornburg/master/hornburg.png">
 </p>
 
 ---
