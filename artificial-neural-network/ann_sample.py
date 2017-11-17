@@ -54,26 +54,20 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
     updatedSLW = 0
 
     for i in range(numOfIterations):
-        firstLayerOutputVector = sigmoid(dot(flw, dataset))
+        firstLayerOutputVector = sigmoid(dot(dataset, flw))
         secondLayerOutputVector = sigmoid(dot(firstLayerOutputVector, slw))
 
-        # Find the error
+        # Find the error and delta for the final layer
         secondLayerError = secondLayerOutputVector - dataset_labels
+        secondLayerDelta = secondLayerError * sigmoidCurve(secondLayerOutputVector)
 
-        # Calculate the adjustment value for the layer 2 weights
-        secondLayerWeightAdjustmentValue = secondLayerError * secondLayerOutputVector * sigmoidCurve(secondLayerOutputVector)
+        # Find the error and delta for the first layer
+        firstLayerError = secondLayerDelta.dot(slw.T)
+        firstLayerDelta = firstLayerError * sigmoidCurve(firstLayerOutputVector)
 
-        # Update the layer 2 weights
-        slw += secondLayerWeightAdjustmentValue
-
-        # First layer error
-        firstLayerError = secondLayerWeightAdjustmentValue.dot(slw.T)
-
-        # First layer weight adjustment
-        firstLayerWeightAdjustmentValue = firstLayerError * firstLayerOutputVector * sigmoidCurve(firstLayerOutputVector)
-
-        # Update the layer 1 weights
-        flw += firstLayerWeightAdjustmentValue
+        # Update the layer 1 and layer 2 weights
+        flw -= secondLayerOutputVector.T.dot(firstLayerDelta)
+        slw -= firstLayerOutputVector.T.dot(secondLayerDelta)
 
         updatedFLW = flw
         updatedSLW = slw
@@ -84,10 +78,9 @@ def trainNeuralNetwork(dataset, flw, slw, numOfIterations):
 # ======================================== #
 # ======= Start and Plot The Result ====== #
 # ======================================== #
+l1_weight, l2_weight = trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
+print("Layer 1 weight updated to:")
+print(l1_weight)
 
-x1 = sigmoid(dot(dataset,firstLayerWeights))
-print(sigmoid(dot(x1, secondLayerWeights)) - dataset_labels)
-
-
-
-# trainNeuralNetwork(dataset, firstLayerWeights, secondLayerWeights, numOfIterations)
+print("\nLayer 2 weight updated to:")
+print(l2_weight)
