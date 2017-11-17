@@ -26,9 +26,9 @@ dataset = [         (array([3, 4, 5]), 1),
 ]
 
 # Define the initial values
-learning_rate = 0.2
+learning_rate = 0.01
 weights = random.rand(3)
-numOfIterations = 150
+numOfIterations = 250
 
 activationFunction = lambda x: 0 if x < 0 else 1
 
@@ -57,4 +57,3 @@ learned_weights = trainSingleLayerPerceptron(dataset, weights, numOfIterations, 
 for vector_i, label_i in dataset:
     test_result = dot(learned_weights, vector_i)
     print("Classified ", vector_i, "as ", activationFunction(test_result))
-

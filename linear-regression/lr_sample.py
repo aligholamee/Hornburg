@@ -49,8 +49,6 @@ def trainWithGradientDescent(coordiantes, h_slope, h_constant, learning_rate):
 
     updated_h_constant = h_constant - (learning_rate * constant_gd_rate)
     updated_h_slope = h_slope - (learning_rate * slope_gd_rate)
-    
-
     return [updated_h_constant, updated_h_slope]
 
 # ======================================== #
